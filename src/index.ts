@@ -13,11 +13,8 @@ let day = process.argv[ 2 ]
   , time
   , result
 
-  if (part1) {
-    time = timeFunc(() => result = part1())
-    console.log(`Part 1:\n  solution: ${result}\n  time: ${time} ms\n`)
-  }
-  if (part2) {
-    time = timeFunc(() => result = part2())
-    console.log(`Part 2:\n  solution: ${result}\n  time: ${time} ms\n`)
-  }
+time = timeFunc(() => result = part1())
+console.log(`Part 1:\n  solution: ${result}\n  time: ${time} ms\n`)
+
+time = timeFunc(() => result = part2())
+console.log(`Part 2:\n  solution: ${result}\n  time: ${time} ms\n`)
