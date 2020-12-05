@@ -21,35 +21,21 @@ export const day04part1 = () => {
   return passports.reduce((sum: number, p) => isValidSimple(p) ? sum + 1 : sum, 0)
 }
 
-const valid_byr = byr => {
-  let year = parseInteger(byr)
-  return year >= 1920 && year <= 2002
-}
-const valid_iyr = iyr => {
-  let year = parseInteger(iyr)
-  return year >= 2010 && year <= 2020
-}
-const valid_eyr = eyr => {
-  let year = parseInteger(eyr)
-  return year >= 2020 && year <= 2030
-}
-const valid_hgt = hgt => {
-  let unit = hgt.slice(-2)
-  let val = parseInteger(hgt.slice(0, -2))
-  if (unit === 'cm')
-    return val >= 150 && val <= 193
-  else if (unit === 'in')
-    return val >= 59 && val <= 76
-  else
-    return false
-}
-const valid_hcl = hcl => {
-  if (hcl.length === 7 && hcl[0] === '#') {
-    let digits = hcl.slice(1).split('')
-    return digits.reduce((valid, digit) => valid && /[0123456789abcdef]/.test(digit), true)
-  }
-  return false
-}
+const valid_byr = (byr, year = parseInteger(byr)) => year >= 1920 && year <= 2002
+const valid_iyr = (iyr, year = parseInteger(iyr)) => year >= 2010 && year <= 2020
+const valid_eyr = (eyr, year = parseInteger(eyr)) => year >= 2020 && year <= 2030
+
+const valid_hgt =
+( hgt
+, unit = hgt.slice(-2)
+, val = parseInteger(hgt.slice(0, -2))
+) => unit === 'cm'
+      ? val >= 150 && val <= 193
+   : unit === 'in'
+      ? val >= 59 && val <= 76
+   : false
+
+const valid_hcl = hcl => /^#[0123456789abcdef]{6}$/.test(hcl)
 const valid_ecl = ecl => ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth'].includes(ecl)
 const valid_pid = pid => /^\d{9}$/.test(pid)
 
