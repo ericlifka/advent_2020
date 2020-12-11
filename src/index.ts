@@ -9,7 +9,8 @@ import { day07part1, day07part2 } from "./solutions/07"
 import { day08part1, day08part2 } from "./solutions/08"
 import { day09part1, day09part2 } from "./solutions/09"
 import { day10part1, day10part2 } from "./solutions/10"
-import { day11part1, day11part2 } from "./solutions/11"
+import { day11part1 } from "./solutions/11_1"
+import { day11part2 } from "./solutions/11_2"
 
 const solutions =
 { '011': day01part1, '012': day01part2

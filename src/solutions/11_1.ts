@@ -86,5 +86,3 @@ export const day11part1 = () => {
     }
   }
 }
-
-export const day11part2 = () => {}
