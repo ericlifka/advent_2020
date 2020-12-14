@@ -1,6 +1,9 @@
 import fs from "fs"
 import { parseInteger } from "./converters"
 
+export const getBlob = (day) =>
+  fs.readFileSync(`data/${day}.dat`, { encoding: "utf8" })
+
 export const getLines = (day) =>
   fs.readFileSync(`data/${day}.dat`, { encoding: "utf8" }).split("\n").slice(0, -1)
 
