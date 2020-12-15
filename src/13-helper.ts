@@ -29,7 +29,7 @@
 function findCommon(pairs) {
     pairs = pairs.sort((l, r) => r[1] - l[1])
     console.log(pairs)
-    
+
     let [[rem1, prime1], [rem2, prime2]] = pairs
     let n = rem1
     while (true) {

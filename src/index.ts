@@ -14,6 +14,7 @@ import { day11part2 } from "./solutions/11_2"
 import { day12part1, day12part2 } from "./solutions/12"
 import { day13part1, day13part2 } from "./solutions/13"
 import { day14part1, day14part2 } from "./solutions/14"
+import { day15part1, day15part2 } from "./solutions/15"
 
 const solutions =
 { '011': day01part1, '012': day01part2
@@ -30,6 +31,7 @@ const solutions =
 , '121': day12part1, '122': day12part2
 , '131': day13part1, '132': day13part2
 , '141': day14part1, '142': day14part2
+, '151': day15part1, '152': day15part2
 }
 
 let day = process.argv[ 2 ]
