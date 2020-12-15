@@ -1,68 +1,45 @@
 import { getLines } from '../input-helpers'
-import {parseInteger} from '../converters'
-import {ascending} from '../converters'
+import { parseInteger } from '../converters'
 
 let [targetstr, idstr] = getLines('13')
 
-let target = parseInteger(targetstr)
-let ids = idstr
+export const day13part1 = (target = parseInteger(targetstr)) =>
+  idstr
     .split(',')
-    .filter(n => n!=='x')
+    .filter(n => n !== 'x')
     .map(parseInteger)
+    .map(id => {
+      let period = target / id
+      let wait = Math.ceil(period) * id - target
 
-export const day13part1 = () => {
-    let waits = []
-    ids.forEach(id => {
-        let period = target / id
-        let wait = Math.ceil(period) * id - target
-        waits.push({wait, id, score: wait * id})
+      return { wait, id, score: wait * id }
     })
+    .sort((l, r) => l.wait - r.wait)
+    [ 0 ].score
 
-    waits.sort((l, r) => l.wait - r.wait)
-    console.log( waits)
-    return waits[0].score
+const findRemainder = (
+  period, 
+  offset,
+  rem = (period - offset) % period
+) => rem < 0
+    ? rem + period
+    : rem
+
+function findCommon(pairs) {
+  let [ [rem1, prime1], [rem2, prime2] ] = pairs.sort( (l, r) => r[1] - l[1] )
+  let n = rem1
+  while (n += prime1)
+    if (n % prime1 == rem1 && n % prime2 == rem2)
+      return [ n, prime1 * prime2 ]
 }
 
-export const day13part2 = () => {
-    let ids = idstr.split(',').map((id, i) => {
-        if (id == 'x') {
-            return null
-        } else {
-            return { id: parseInteger(id), offset: i }
-        }
-    }).filter(n => !!n)
-
-    console.log(JSON.stringify(ids))
-    let t = 100000000000675
-    while (true) {
-        if (t % 23 == 0 &&
-            (t + 13) % 41 == 0 &&
-            (t + 23) % 829 == 0 &&
-            (t + 36) % 13 == 0 &&
-            (t + 37 % 17) == 0 &&
-            (t + 52) % 29 == 0 &&
-            (t + 54) % 677 == 0 &&
-            (t + 60) % 37 == 0 &&
-            (t + 73) % 19 == 0) {
-                console.log(t)
-                return t
-            }
-        
-        t += 829
-        if (t % 1000000000 === 0) {
-            console.log(t)
-        }
-    }
-}
-
-/*
-0 23
-28 41
-806 829
-3 13
-14 17
-6 29
-623 677
-14 37
-3 19
-*/
+export const day13part2 = () =>
+  idstr
+    .split(',')
+    .map((id, i) =>
+      id == 'x'
+        ? null
+        : [ i, parseInteger(id) ])
+    .filter(n => n)
+    .map(([ offset, period ]) => [ findRemainder(period, offset), period ])
+    .reduce((pair1, pair2) => findCommon([ pair1, pair2 ]))[ 0 ]
