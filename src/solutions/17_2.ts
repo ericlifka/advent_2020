@@ -1,3 +1,4 @@
+import { parseInteger } from '../converters'
 import {getLines} from '../input-helpers'
 
 let lines = getLines('17')
@@ -23,13 +24,32 @@ const countNeighbors = (game, x, y, z, w) => {
   return count
 }
 
+const ranges = game => {
+  let min = { x: 0, y: 0, z: 0, w: 0 }
+  let max = { x: 0, y: 0, z: 0, w: 0 }
+  Object.keys(game).forEach(key => {
+    let [x, y, z, w] = key.split(',').map(parseInteger)
+    min.x = Math.min(min.x, x)
+    min.y = Math.min(min.y, y)
+    min.z = Math.min(min.z, z)
+    min.w = Math.min(min.w, w)
+
+    max.x = Math.max(max.x, x)
+    max.y = Math.max(max.y, y)
+    max.z = Math.max(max.z, z)
+    max.w = Math.max(max.w, w)
+  })
+  return { min, max }
+}
+
 const nextGen = game => {
+  let range = ranges(game)
   let next = {}
 
-  for (let x = -10; x <= 20; x++) {
-    for (let y = -10; y <= 20; y++) {
-      for (let z = -10; z <= 20; z++) {
-        for (let w = -10; w <= 20; w++) {
+  for (let x = range.min.x - 1; x <= range.max.x + 1; x++) {
+    for (let y = range.min.y - 1; y <= range.max.y + 1; y++) {
+      for (let z = range.min.z - 1; z <= range.max.z + 1; z++) {
+        for (let w = range.min.w - 1; w <= range.max.w + 1; w++) {
           let neighbors = countNeighbors(game, x, y, z, w)
 
           if (isAlive(game, x, y, z, w)) {
