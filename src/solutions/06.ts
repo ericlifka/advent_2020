@@ -2,7 +2,7 @@ import { getLines } from '../input-helpers'
 import { reduceSum } from '../converters'
 import { union, intersection } from '../sets'
 
-let groups = 
+const getInput = () => 
 getLines('06')
   .join('\n')
   .split('\n\n')
@@ -10,7 +10,7 @@ getLines('06')
                       .map( person => new Set(person.split(''))))
 
 export const day06part1 = () => {
-  return groups
+  return getInput()
     .map( group => 
       group.reduce((sum, person) => 
         union(sum, person)).size )
@@ -18,7 +18,7 @@ export const day06part1 = () => {
 }
 
 export const day06part2 = () => {
-  return groups
+  return getInput()
     .map( group => 
       group.reduce((sum, person) => 
         intersection(sum, person)).size )

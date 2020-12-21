@@ -1,16 +1,17 @@
 import { getLines } from '../input-helpers'
 import { parseInteger } from '../converters'
 
-let entries = getLines('02')
-  .map((line: string) => line.split(': '))
-  .map(([spec, password]: [string, string]) => [spec.split(' '), password])
-  .map(([[range, letter], password]: [[string, string], string]) => [range.split('-'), letter, password])
-  .map(([[left, right], letter, password]: [[string, string], string, string]) => ({
-    left: parseInteger(left),
-    right: parseInteger(right),
-    letter,
-    password
-  }))
+const getInput = () =>
+  getLines('02')
+    .map((line: string) => line.split(': '))
+    .map(([spec, password]: [string, string]) => [spec.split(' '), password])
+    .map(([[range, letter], password]: [[string, string], string]) => [range.split('-'), letter, password])
+    .map(([[left, right], letter, password]: [[string, string], string, string]) => ({
+      left: parseInteger(left),
+      right: parseInteger(right),
+      letter,
+      password
+    }))
 
 function bucket(st) {
   let letters = st.split('')
@@ -26,6 +27,7 @@ function bucket(st) {
 }
 
 export const day02part1 = () => {
+  let entries = getInput()
   let count = 0
 
   entries.forEach(({ left, right, letter, password }) => {
@@ -38,6 +40,7 @@ export const day02part1 = () => {
 }
 
 export const day02part2 = () => {
+  let entries = getInput()
   let count = 0
 
   entries.forEach(({ left, right, letter, password }) => {

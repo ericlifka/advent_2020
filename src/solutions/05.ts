@@ -2,11 +2,12 @@ import { getLines } from '../input-helpers'
 
 type Range = [ number, number ]
 
-let passes = getLines('05')
-  .map(line => ({
-    col: line.slice(7),
-    row: line.slice(0, 7)
-  }))
+const getInput = () =>
+  getLines('05')
+    .map(line => ({
+      col: line.slice(7),
+      row: line.slice(0, 7)
+    }))
 
 const reduceRange = (letter, [lower, upper]): Range =>
   (letter === 'F' || letter === 'L')
@@ -24,14 +25,14 @@ const runCode = (code): number => {
 const calcSeatId = ({col, row}) => runCode(row) * 8 + runCode(col)
 
 export const day05part1 = () => {
-  return passes
+  return getInput()
     .map(pass => calcSeatId(pass))
     .sort((l, r) => r - l)
     [0]
 }
 
 export const day05part2 = () => {
-  let seats = passes
+  let seats = getInput()
     .map(pass => calcSeatId(pass))
     .sort((l, r) => l - r)
 

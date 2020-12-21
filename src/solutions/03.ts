@@ -1,10 +1,11 @@
 import { getLines } from '../input-helpers'
 
-let grid = getLines('03')
-  .map(line => line.repeat(100))
-  .map(line => line.split(''))
+const getInput = () =>
+  getLines('03')
+    .map(line => line.repeat(100))
+    .map(line => line.split(''))
 
-function checkSlope(dx, dy) {
+function checkSlope(grid, dx, dy) {
   let x = 0, y = 0, count = 0
   while (y < grid.length) {
     if (grid[y][x] === '#')
@@ -17,13 +18,15 @@ function checkSlope(dx, dy) {
 }
 
 export const day03part1 = () => {
-  return checkSlope(3, 1)
+  let grid = getInput()
+  return checkSlope(grid, 3, 1)
 }
 
 export const day03part2 = () => {
-  return checkSlope(1, 1) *
-         checkSlope(3, 1) *
-         checkSlope(5, 1) *
-         checkSlope(7, 1) *
-         checkSlope(1, 2)
+  let grid = getInput()
+  return checkSlope(grid, 1, 1) *
+         checkSlope(grid, 3, 1) *
+         checkSlope(grid, 5, 1) *
+         checkSlope(grid, 7, 1) *
+         checkSlope(grid, 1, 2)
 }

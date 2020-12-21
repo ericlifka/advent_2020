@@ -1,24 +1,24 @@
 import { getLines } from '../input-helpers'
 import { parseInteger } from '../converters'
 
-let passports =
-getLines('04')
-  .join('\n')
-  .split('\n\n')
-  .map(pblob => pblob.split(/\s/))
-  .map(parr => {
-    let passport = {}
-    parr.forEach(s => {
-      let [key, val] = s.split(':')
-      passport[key] = val
+const getInput = () =>
+  getLines('04')
+    .join('\n')
+    .split('\n\n')
+    .map(pblob => pblob.split(/\s/))
+    .map(parr => {
+      let passport = {}
+      parr.forEach(s => {
+        let [key, val] = s.split(':')
+        passport[key] = val
+      })
+      return passport
     })
-    return passport
-  })
 
 const isValidSimple = p => p.byr && p.iyr && p.eyr && p.hgt && p.hcl && p.ecl && p.pid
 
 export const day04part1 = () => {
-  return passports.reduce((sum: number, p) => isValidSimple(p) ? sum + 1 : sum, 0)
+  return getInput().reduce((sum: number, p) => isValidSimple(p) ? sum + 1 : sum, 0)
 }
 
 const valid_byr = (byr, year = parseInteger(byr)) => year >= 1920 && year <= 2002
@@ -49,5 +49,5 @@ const isValid = p =>
   p.pid && valid_pid(p.pid)
 
 export const day04part2 = () => {
-  return passports.reduce((sum: number, p) => isValid(p) ? sum + 1 : sum, 0)
+  return getInput().reduce((sum: number, p) => isValid(p) ? sum + 1 : sum, 0)
 }
