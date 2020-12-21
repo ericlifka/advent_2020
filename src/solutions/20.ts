@@ -436,5 +436,5 @@ export const day20part2 = () => {
     }
   }
 
-  console.log('ANSWER', count)
+  return count
 }
