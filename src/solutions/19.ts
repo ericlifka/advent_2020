@@ -22,11 +22,6 @@ const getInput = () => {
     .forEach(r => {
       rules[r.rule] = r
     })
-
-  // console.log(messages)
-  // for (let rule in rules) {
-  //   console.log(rules[ rule ])
-  // }
 }
 
 function testRule(string, position, rule) {
