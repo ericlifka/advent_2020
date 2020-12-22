@@ -1,7 +1,8 @@
 import { parseInteger } from '../converters'
 import { getLines } from '../input-helpers'
 
-const numbers = getLines('09').map(parseInteger)
+let numbers;
+const getInput = () => numbers = getLines('09').map(parseInteger)
 
 const checkNumber = (position) => {
   let target = numbers[position]
@@ -17,6 +18,7 @@ const checkNumber = (position) => {
 }
 
 export const day09part1 = () => {
+  getInput()
   let position = 25
   while (checkNumber(position))
     position++

@@ -1,9 +1,12 @@
 import { getLines } from '../input-helpers'
 import { parseInteger } from '../converters'
 
-let startingGrid = getLines('11').map(line => line.split(''))
-const height = startingGrid.length
-const width = startingGrid[0].length
+let startingGrid, height, width;
+const getInput = () => {
+  startingGrid = getLines('11').map(line => line.split(''))
+  height = startingGrid.length
+  width = startingGrid[0].length
+}
 
 const emptyGrid = () => {
   let newGrid = []
@@ -69,6 +72,7 @@ const countSeats = (grid) => {
 }
 
 export const day11part1 = () => {
+  getInput()
   let grid = startingGrid
   let newGrid = emptyGrid()
 

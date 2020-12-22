@@ -2,12 +2,16 @@ import { parseInteger } from '../converters'
 import { getLines } from '../input-helpers'
 import { ascending } from '../converters'
 
-let adapters = getLines('10')
-  .map(parseInteger)
-  .sort(ascending)
-adapters =  [0, ...adapters, adapters[adapters.length - 1] + 3]
+let adapters;
+const getInput = () => {
+  adapters = getLines('10')
+    .map(parseInteger)
+    .sort(ascending)
+  adapters =  [0, ...adapters, adapters[adapters.length - 1] + 3]
+}
 
 export const day10part1 = () => {
+  getInput()
   let ones = 0
   let threes = 0
   for (let i = 0; i < adapters.length - 1; i++)

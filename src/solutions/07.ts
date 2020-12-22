@@ -2,7 +2,9 @@ import { getLines } from '../input-helpers'
 import { parseInteger, splitter } from '../converters'
 import { union } from '../sets'
 
-const data = getLines('07')
+let data;
+const getInput = () => {
+data = getLines('07')
   .map(splitter(' bags contain '))
   .map(([color, targets]) => ({
     color, 
@@ -12,6 +14,7 @@ const data = getLines('07')
                        return match ? match[1] : null
                      })
   }))
+}
 
 function findContainsColor(target) {
   let colors = new Set()
@@ -32,6 +35,7 @@ function findContainsAll(targets) {
 }
 
 export const day07part1 = () => {
+  getInput()
   let last = 0
   let colors = new Set(findContainsColor('shiny gold'))
   let interations = 0

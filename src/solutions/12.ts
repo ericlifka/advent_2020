@@ -2,7 +2,9 @@ import { getLines } from '../input-helpers'
 import { parseInteger } from '../converters'
 import { doTimes } from '../functional'
 
-let instructions = getLines('12')
+let instructions;
+const getInput = () => 
+instructions = getLines('12')
   .map(ins => ({
     ins: ins[0], 
     val: parseInteger(ins.slice(1))
@@ -18,6 +20,8 @@ const rLeftTimes = (point, n) =>
   (doTimes(n, () => point = rLeft(point)), point)
 
 export const day12part1 = () => {
+  getInput()
+  
   let [fx, fy] = [1, 0]
   let [x, y] = [0, 0]
 
